@@ -1,5 +1,11 @@
 import json
 import traceback
+
+try:
+    ModuleNotFoundError
+except NameError:
+    ModuleNotFoundError = ImportError
+
 try:
     from urllib2 import HTTPPasswordMgrWithDefaultRealm, HTTPBasicAuthHandler, build_opener, Request, HTTPHandler, HTTPError
     python3=False
@@ -38,9 +44,9 @@ def send(address, message, requestType, useAuth=False, username="", password="")
             
             response = opener.open(request)
 
-        data = response.read().encode('utf-8')
+        data = response.read()
             
-        data = data.replace('\n',' ')
+        data = data.replace(b'\n',b' ')
         
     except HTTPError as err:
         data = traceback.format_exc()
@@ -84,6 +90,9 @@ def pSend(address, message, requestType, body, useAuth=False, username="", passw
         
         else:
             opener = build_opener(HTTPHandler)
+            if python3:
+            	if isinstance(body, str):
+            		body=body.encode('utf-8')
             request = Request(url, data=body)
             request.get_method = lambda: requestType
             response = opener.open(request)

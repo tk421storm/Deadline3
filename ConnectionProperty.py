@@ -3,7 +3,8 @@ import subprocess
 import os
 import json
 import traceback
-import DeadlineSend
+
+from . import DeadlineSend
 
 class ConnectionProperty:
 
