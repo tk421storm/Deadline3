@@ -1,7 +1,8 @@
 import json
 import ast
-from ConnectionProperty import ConnectionProperty
-from DeadlineUtility import ArrayToCommaSeparatedString
+
+from .ConnectionProperty import ConnectionProperty
+from .DeadlineUtility import ArrayToCommaSeparatedString
 
 class Jobs:
     """

@@ -1,5 +1,6 @@
-from ConnectionProperty import ConnectionProperty
 import json
+
+from .ConnectionProperty import ConnectionProperty
 
 class Tasks:
     """

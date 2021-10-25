@@ -3,23 +3,10 @@ import subprocess
 import os
 import json
 import traceback
-import Jobs
-import SlavesRenderingJob
-import JobReports
-import TaskReports
-import Limits
-import Tasks
-import Pulse
-import Repository
-import MappedPaths
-import MaximumPriority
-import Pools
-import Groups
-import Plugins
-import Slaves
-import Users
-import Balancer
-from ConnectionProperty import ConnectionProperty
+
+from . import Jobs,SlavesRenderingJob,JobReports,TaskReports,Limits,Tasks,Pulse,Repository,MappedPaths,MaximumPriority,Pools,Groups
+from . import Plugins,Slaves,Users,Balancer
+from .ConnectionProperty import ConnectionProperty
 
 #http://docs.python.org/2/library/httplib.html
 

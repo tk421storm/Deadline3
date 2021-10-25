@@ -1,6 +1,8 @@
-from ConnectionProperty import ConnectionProperty
-from DeadlineUtility import ArrayToCommaSeparatedString
 import json
+
+from .ConnectionProperty import ConnectionProperty
+from .DeadlineUtility import ArrayToCommaSeparatedString
+
 
 class LimitGroups:
     """

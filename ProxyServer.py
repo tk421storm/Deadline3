@@ -1,7 +1,7 @@
-from ConnectionProperty import ConnectionProperty
-from DeadlineUtility import ArrayToCommaSeparatedString
-
 import json
+
+from .ConnectionProperty import ConnectionProperty
+from .DeadlineUtility import ArrayToCommaSeparatedString
 
 class ProxyServer:
     """ Class used by DeadlineCon to send ProxyServer requests.

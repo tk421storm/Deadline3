@@ -1,4 +1,4 @@
-from ConnectionProperty import ConnectionProperty
+from .ConnectionProperty import ConnectionProperty
 
 class JobReports:
     """

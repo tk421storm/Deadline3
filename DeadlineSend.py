@@ -1,8 +1,12 @@
-import socket
-import httplib
 import json
-import urllib2
 import traceback
+try:
+    from urllib2 import HTTPPasswordMgrWithDefaultRealm, HTTPBasicAuthHandler, build_opener, Request, HTTPHandler, HTTPError
+    python3=False
+except (ImportError, ModuleNotFoundError):
+    from urllib.request import HTTPPasswordMgrWithDefaultRealm, HTTPBasicAuthHandler, build_opener, Request, HTTPHandler
+    from urllib.error import HTTPError
+    python3=True
 
 def send(address, message, requestType, useAuth=False, username="", password=""):
     """
@@ -17,28 +21,28 @@ def send(address, message, requestType, useAuth=False, username="", password="")
         url = address + message
         
         if useAuth:
-            password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
+            password_mgr = HTTPPasswordMgrWithDefaultRealm()
 
             password_mgr.add_password(None, url, username, password)
 
-            handler = urllib2.HTTPBasicAuthHandler(password_mgr)
-            opener = urllib2.build_opener(handler)
-            request = urllib2.Request(url)
+            handler = HTTPBasicAuthHandler(password_mgr)
+            opener = build_opener(handler)
+            request = Request(url)
             request.get_method = lambda: requestType
             
             response = opener.open(request)
         else:
-            opener = urllib2.build_opener(urllib2.HTTPHandler)
-            request = urllib2.Request(url)
+            opener = build_opener(HTTPHandler)
+            request = Request(url)
             request.get_method = lambda: requestType
             
             response = opener.open(request)
 
-        data = response.read()
+        data = response.read().encode('utf-8')
             
         data = data.replace('\n',' ')
         
-    except urllib2.HTTPError as err:
+    except HTTPError as err:
         data = traceback.format_exc()
         if err.code == 401:
             data = "Error: HTTP Status Code 401. Authentication with the Web Service failed. Please ensure that the authentication credentials are set, are correct, and that authentication mode is enabled."
@@ -66,27 +70,27 @@ def pSend(address, message, requestType, body, useAuth=False, username="", passw
         url = address + message
         
         if useAuth:
-            password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
+            password_mgr = HTTPPasswordMgrWithDefaultRealm()
             
             password_mgr.add_password(None, url, username, password)
 
-            handler = urllib2.HTTPBasicAuthHandler(password_mgr)
-            opener = urllib2.build_opener(handler)
+            handler = HTTPBasicAuthHandler(password_mgr)
+            opener = build_opener(handler)
             
-            request = urllib2.Request(url, data=body)
+            request = Request(url, data=body)
             request.get_method = lambda: requestType
             
             response = opener.open(request)
         
         else:
-            opener = urllib2.build_opener(urllib2.HTTPHandler)
-            request = urllib2.Request(url, data=body)
+            opener = build_opener(HTTPHandler)
+            request = Request(url, data=body)
             request.get_method = lambda: requestType
             response = opener.open(request)
             
         data = response.read()
 
-    except urllib2.HTTPError as err:
+    except HTTPError as err:
         data = traceback.format_exc()
         if err.code == 401:
             data = "Error: HTTP Status Code 401. Authentication with the Web Service failed. Please ensure that the authentication credentials are set, are correct, and that authentication mode is enabled."
