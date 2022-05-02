@@ -1,13 +1,12 @@
-import json
-
+from __future__ import absolute_import
 from .ConnectionProperty import ConnectionProperty
 from .DeadlineUtility import ArrayToCommaSeparatedString
-
+import json
 
 class Groups:
     """
         Class used by DeadlineCon to send Group requests. Additional
-        Group requests related to Slaves can be found in the Slaves.py file.
+        Group requests related to Workers can be found in the Slaves.py file.
         Stores the address of the Web Service for use in sending requests.
     """
     def __init__(self, connectionProperties):

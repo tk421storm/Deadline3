@@ -1,6 +1,6 @@
+from __future__ import absolute_import
 import json
 import ast
-
 from .ConnectionProperty import ConnectionProperty
 from .DeadlineUtility import ArrayToCommaSeparatedString
 
@@ -235,9 +235,9 @@ class Jobs:
     def SetJobMachineLimit(self, id, limit, slaveList, whiteListFlag):
         """    Sets a Job's machine limit.
             Input:  id: The Job ID.
-                    limit: The maximum number of Slaves that can work on this Job at any one time.
-                    slaveList: A list of Slaves which are either not allowed to work on or are the only allowed Slave for a Job.
-                    whiteListFlag: If true the Slaves in the slavelist are the only Slaves allowed to work on the Job else, the Slaves are now allowed to work on the Job.
+                    limit: The maximum number of Workers that can work on this Job at any one time.
+                    slaveList: A list of Workers which are either not allowed to work on or are the only allowed Worker for a Job.
+                    whiteListFlag: If true the Workers in the slaveList are the only Workers allowed to work on the Job else, the Workers are now allowed to work on the Job.
             Returns: Success message.
         """
         body = json.dumps({"Command":"setjobmachinelimit","JobID":id, "Limit":limit, "SlaveList":slaveList,"WhiteListFlag":whiteListFlag})
@@ -245,9 +245,9 @@ class Jobs:
         return self.connectionProperties.__put__("/api/jobs", body)
 
     def AddSlavesToJobMachineLimitList(self, id, slaveList):
-        """    Add additional Slaves to the Jobs limit list.
+        """    Add additional Workers to the Jobs limit list.
             Input:  id: The Job ID.
-            slaveList: The Slaves to be added to the Jobs machine limit list.
+            slaveList: The Workers to be added to the Jobs machine limit list.
             Returns: Success message.
         """
         body = json.dumps({"Command":"addslavestojobmachinelimitlist","JobID":id, "SlaveList":slaveList})
@@ -255,9 +255,9 @@ class Jobs:
         return self.connectionProperties.__put__("/api/jobs", body)
 
     def RemoveSlavesFromJobMachineLimitList(self, id, slaveList):
-        """    Remove chosen Slaves from the Jobs limit list.
+        """    Remove chosen Workers from the Jobs limit list.
             Input: id: The Job ID.
-            slaveList: The Slaves to be removed from the Jobs machine limit list.
+           slaveList: The Workers to be removed from the Jobs machine limit list.
             Returns: Success message.
         """
         body = json.dumps({"Command":"removeslavesfromjobmachinelimitlist","JobID":id,"SlaveList":slaveList})
@@ -265,9 +265,9 @@ class Jobs:
         return self.connectionProperties.__put__("/api/jobs", body)
         
     def SetJobMachineLimitListedSlaves(self, id, slaveList):
-        """    Sets a Job's machine limit Slave list.
+        """    Sets a Job's machine limit Worker list.
             Input:  id: The Job ID.
-            slaveList: A list of Slaves which are either not allowed to work on or are the only allowed Slave for a Job.
+            slaveList: A list of Workers which are either not allowed to work on or are the only allowed Worker for a Job.
             Returns: Success message.
         """
         body = json.dumps({"Command":"setjobmachinelimitlistedslaves","JobID":id, "SlaveList":slaveList})
@@ -275,9 +275,9 @@ class Jobs:
         return self.connectionProperties.__put__("/api/jobs", body)
 
     def SetJobMachineLimitWhiteListFlag(self, id, whiteListFlag):
-        """    Sets a Job's machine limit white list flag.
+        """    Sets a Job's machine limit allow list flag.
             Input:  id: The Job ID.
-            whiteListFlag: If true the Slaves in the slavelist are the only Slaves allowed to work on the Job else, the Slaves are now allowed to work on the Job.
+            whiteListFlag: If true the Workers in the slaveList are the only Workers allowed to work on the Job else, the Workers are now allowed to work on the Job.
             Returns: Success message.
         """
         body = json.dumps({"Command":"setjobmachinelimitwhitelistflag","JobID":id, "WhiteListFlag":whiteListFlag})
@@ -285,9 +285,9 @@ class Jobs:
         return self.connectionProperties.__put__("/api/jobs", body)
 
     def SetJobMachineLimitMaximum(self, id, limit):
-        """    Sets a Job's machine limit maximum number of Slaves.
+        """    Sets a Job's machine limit maximum number of Workers.
             Input:  id: The Job ID.
-            limit: The maximum number of Slaves that can work on this Job at any one time.
+            limit: The maximum number of Workers that can work on this Job at any one time.
             Returns: Success message.
         """
         body = json.dumps({"Command":"setjobmachinelimitmaximum","JobID":id, "Limit":limit})

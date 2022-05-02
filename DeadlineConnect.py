@@ -1,11 +1,25 @@
+from __future__ import absolute_import
 import sys
 import subprocess
 import os
 import json
 import traceback
-
-from . import Jobs,SlavesRenderingJob,JobReports,TaskReports,Limits,Tasks,Pulse,Repository,MappedPaths,MaximumPriority,Pools,Groups
-from . import Plugins,Slaves,Users,Balancer
+from . import Jobs
+from . import SlavesRenderingJob
+from . import JobReports
+from . import TaskReports
+from . import Limits
+from . import Tasks
+from . import Pulse
+from . import Repository
+from . import MappedPaths
+from . import MaximumPriority
+from . import Pools
+from . import Groups
+from . import Plugins
+from . import Slaves
+from . import Users
+from . import Balancer
 from .ConnectionProperty import ConnectionProperty
 
 #http://docs.python.org/2/library/httplib.html
@@ -17,15 +31,18 @@ class DeadlineCon:
         Web Service is listening on are required for construction.
         Call other API functions through this object.
     """
-    def __init__(self, host, port):
+    def __init__(self, host, port, useTls=False, caCert=None, insecure=False):
         """ Constructs an instance of DeadlineCon.
             Params: host name of the Web Service (string).
                     port number the Web Service is listening on (integer).
+                    useTls specifies wether the webservice is listining on a TLS port or not.
+                    caCert specifies the caCert to use to validate the response form the webservice.
+                    insecure NOT RECOMMENDED, True specifies that we shouldn't validate the respone from the webservice.
         """
         
         #Builds the ConnectionProperty object used for sending requests.
         address = host+":"+str(port)
-        self.connectionProperties = ConnectionProperty(address)
+        self.connectionProperties = ConnectionProperty(address, False, useTls, caCert, insecure)
         
         #The different request groups use the ConnectionProperty object to send their requests.
         self.Jobs = Jobs.Jobs(self.connectionProperties)

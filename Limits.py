@@ -1,8 +1,7 @@
-import json
-
+from __future__ import absolute_import
 from .ConnectionProperty import ConnectionProperty
 from .DeadlineUtility import ArrayToCommaSeparatedString
-
+import json
 
 class LimitGroups:
     """
@@ -48,10 +47,10 @@ class LimitGroups:
         """ Creates a limit group if it doesn't exist, or updates its properties if it does.
             Input:  name: The limit group name.
                     limit: The limit.
-                    listedSlaves: The list of Slaves.
-                    isWhiteList: True if the list of Slaves is a whitelist.
+                    slaveList: The list of Workers.
+                    isWhiteList: True if the list of Workers is an allow list.
                     progress: The release percentage.
-                    excludedSlaves: The list of Slaves that will ignore this limit group.
+                    excludedSlaves: The list of Workers that will ignore this limit group.
             Returns: Success message.
         """
         body = '{"Command":"set", "Name":"'+name+'"'

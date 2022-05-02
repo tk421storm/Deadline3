@@ -1,13 +1,12 @@
-import json
-
+from __future__ import absolute_import
 from .ConnectionProperty import ConnectionProperty
 from .DeadlineUtility import ArrayToCommaSeparatedString
-
+import json
 
 class Pools:
     """
         Class used by DeadlineCon to send Pool requests. Additional
-        Pool requests related to Slaves can be found in the Slaves.py file. 
+        Pool requests related to Workers can be found in the Slaves.py file.
         Stores the address of the Web Service for use in sending requests.
     """
     def __init__(self, connectionProperties):

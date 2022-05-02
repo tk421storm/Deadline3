@@ -1,8 +1,7 @@
-import json
-
+from __future__ import absolute_import
 from .ConnectionProperty import ConnectionProperty
 from .DeadlineUtility import ArrayToCommaSeparatedString
-
+import json
 
 class Balancer:
     """

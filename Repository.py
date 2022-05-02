@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from .ConnectionProperty import ConnectionProperty
 
 class Repository:
@@ -19,8 +20,8 @@ class Repository:
         return self.connectionProperties.__post__('/api/repository', body)
         
     def AddSlaveHistoryEntry(self, slaveName, entry):
-        """ Adds the provided entry for the Slave name provided.
-            Input:  Slave name (string).
+        """ Adds the provided entry for the Worker name provided.
+            Input:  Worker name (string).
                     entry (string).
             Returns: Success if successful.
         """

@@ -1,6 +1,6 @@
-import json
-
+from __future__ import absolute_import
 from .ConnectionProperty import ConnectionProperty
+import json
 
 class Tasks:
     """
